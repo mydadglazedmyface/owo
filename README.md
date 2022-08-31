@@ -1,2 +1,2 @@
 # SAVE MEEEEEEEEEEEEEEEE
-![uoooooogh](./sad.png)
+![uoooooogh](/assets/images/sad.png)
