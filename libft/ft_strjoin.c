@@ -1,32 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npongdon <npongdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/01 21:56:12 by npongdon          #+#    #+#             */
-/*   Updated: 2022/09/05 20:06:20 by npongdon         ###   ########.fr       */
+/*   Created: 2022/09/05 18:17:21 by npongdon          #+#    #+#             */
+/*   Updated: 2022/09/05 20:08:25 by npongdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcpy(char *dest, const char *src, size_t size)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t	i;
+	char	*s3;
 
-	i = 0;
-	if (size > 0)
+	s3 = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (s3 != 0)
 	{
-		while (src[i] != '\0' && i < size - 1)
-		{
-			dest[i] = src[i];
-			i++;
-		}
-		dest[i] = 0;
+		ft_strlcpy(s3, s1, ft_strlen(s1));
+		ft_strlcpy(s3 + ft_strlen(s1), s2, ft_strlen(s2));
+		s3[ft_strlen(s3)] = '\0';
 	}
-	while (src[i] != '\0')
-		i++;
-	return (i);
+	return (s3);
+}
+
+#include <stdio.h>
+
+int	main(void)
+{
+	char	*a = "123dwsdw";
+	char	*b = "vrvrvrvroooom";
+	char	*c = ft_strjoin(a, b);
+	puts(c);
+	free(s);
+	return (0);
 }

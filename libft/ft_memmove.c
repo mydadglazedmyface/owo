@@ -6,13 +6,13 @@
 /*   By: npongdon <npongdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 21:44:58 by npongdon          #+#    #+#             */
-/*   Updated: 2022/09/01 21:46:00 by npongdon         ###   ########.fr       */
+/*   Updated: 2022/09/04 16:49:50 by npongdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 void	*ft_memmove(void *dst, const void *src, unsigned int len)
 {
-	unsigned 			inti;
+	unsigned int		i;
 	unsigned char		*dstt;
 	const unsigned char	*srcc;
 

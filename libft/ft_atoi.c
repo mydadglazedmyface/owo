@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npongdon <npongdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/01 21:56:12 by npongdon          #+#    #+#             */
-/*   Updated: 2022/09/05 20:06:20 by npongdon         ###   ########.fr       */
+/*   Created: 2022/09/04 17:58:50 by npongdon          #+#    #+#             */
+/*   Updated: 2022/09/04 18:07:30 by npongdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-size_t	ft_strlcpy(char *dest, const char *src, size_t size)
+int	ft_atoi(const char *nptr)
 {
-	size_t	i;
+	int	n;
 
-	i = 0;
-	if (size > 0)
+	n = 0;
+	while (*nptr >= '0' && *nptr <= '9')
 	{
-		while (src[i] != '\0' && i < size - 1)
-		{
-			dest[i] = src[i];
-			i++;
-		}
-		dest[i] = 0;
+		n *= 10;
+		n += *nptr - '0';
+		nptr++;
 	}
-	while (src[i] != '\0')
-		i++;
-	return (i);
+	return (n);
 }

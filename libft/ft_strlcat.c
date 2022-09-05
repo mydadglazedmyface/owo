@@ -6,7 +6,7 @@
 /*   By: npongdon <npongdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 22:14:10 by npongdon          #+#    #+#             */
-/*   Updated: 2022/09/02 18:30:06 by npongdon         ###   ########.fr       */
+/*   Updated: 2022/09/04 16:48:59 by npongdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@ static size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-size_t ft_strlcat(char *dst, const char *src, size_t size)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-    size_t	i;
+	size_t	i;
 	size_t	j;
 
 	i = ft_strlen(dst);
 	j = 0;
 	while (i + j < size - 1)
 	{
-		dst[i + j] = src[j]; 
+		dst[i + j] = src[j];
 		j++;
 		if (src[j] == '\0')
 		{
