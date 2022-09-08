@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npongdon <npongdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/05 19:45:06 by npongdon          #+#    #+#             */
-/*   Updated: 2022/09/08 18:33:14 by npongdon         ###   ########.fr       */
+/*   Created: 2022/09/08 17:49:03 by npongdon          #+#    #+#             */
+/*   Updated: 2022/09/08 18:39:27 by npongdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "libft.h"
+#include <stdio.h>
 
-# include <stddef.h>
-# include <stdlib.h>
-
-typedef struct s_list
+int	main(void)
 {
-	void			*content;
-	struct s_list	*next;
-}				t_list;
-
-size_t	ft_strlen(const char *s);
-size_t	ft_strlcpy(char *dest, const char *src, size_t size);
-char	*ft_strjoin(char const *s1, char const *s2);
-
-#endif
+	char	*s = ft_strjoin("syssy", "vveveve");
+	puts(s);
+	free(s);
+	return (0);
+}
