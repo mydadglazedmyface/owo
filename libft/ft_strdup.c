@@ -6,13 +6,11 @@
 /*   By: npongdon <npongdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 22:35:11 by npongdon          #+#    #+#             */
-/*   Updated: 2022/09/04 23:59:51 by npongdon         ###   ########.fr       */
+/*   Updated: 2022/09/08 19:31:43 by npongdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
-#include <stdlib.h>
-#include <stddef.h>
+#include "libft.h"
 
 char	*ft_strdup(const char *s)
 {

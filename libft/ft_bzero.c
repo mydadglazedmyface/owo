@@ -6,9 +6,11 @@
 /*   By: npongdon <npongdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 21:21:10 by npongdon          #+#    #+#             */
-/*   Updated: 2022/09/04 21:34:27 by npongdon         ###   ########.fr       */
+/*   Updated: 2022/09/08 20:01:44 by npongdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 void	ft_bzero(void *s, size_t n)
 {
