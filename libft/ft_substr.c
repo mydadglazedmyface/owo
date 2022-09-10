@@ -6,7 +6,7 @@
 /*   By: npongdon <npongdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 00:11:28 by npongdon          #+#    #+#             */
-/*   Updated: 2022/09/08 19:28:18 by npongdon         ###   ########.fr       */
+/*   Updated: 2022/09/08 22:42:46 by npongdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char			*str;
 	unsigned int	i;
 
-	str = (char *)malloc(len + 1);
+	str = ft_calloc(len + 1, 1);
 	i = 0;
 	if (str != 0)
 	{
@@ -27,7 +27,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 			i++;
 			len--;
 		}
-		str[i] = '\0';
 	}
 	return (str);
 }
