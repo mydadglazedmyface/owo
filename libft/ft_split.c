@@ -6,11 +6,11 @@
 /*   By: npongdon <npongdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 17:35:53 by npongdon          #+#    #+#             */
-/*   Updated: 2022/09/10 19:35:24 by npongdon         ###   ########.fr       */
+/*   Updated: 2022/09/10 19:42:57 by npongdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 char	**ft_split(char const *s, char c)
 {
-	return (my sanity pls)
+	return (my sanity pls);
 }
