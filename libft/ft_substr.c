@@ -6,7 +6,7 @@
 /*   By: npongdon <npongdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 00:11:28 by npongdon          #+#    #+#             */
-/*   Updated: 2022/09/08 22:42:46 by npongdon         ###   ########.fr       */
+/*   Updated: 2022/09/11 19:47:43 by npongdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,14 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	unsigned int	i;
 
 	str = ft_calloc(len + 1, 1);
+	if (!str)
+		return (0);
 	i = 0;
-	if (str != 0)
+	while (len > 0)
 	{
-		while (len > 0)
-		{
-			str[i] = s[start + i];
-			i++;
-			len--;
-		}
+		str[i] = s[start + i];
+		i++;
+		len--;
 	}
 	return (str);
 }
