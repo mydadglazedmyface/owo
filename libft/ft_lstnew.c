@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npongdon <npongdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/01 21:37:03 by npongdon          #+#    #+#             */
-/*   Updated: 2022/09/14 17:53:33 by npongdon         ###   ########.fr       */
+/*   Created: 2022/09/13 15:58:22 by npongdon          #+#    #+#             */
+/*   Updated: 2022/09/13 17:16:06 by npongdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *s, int c, size_t n)
+t_list	*ft_lstnew(void *content)
 {
-	size_t			i;
-	unsigned char	*str;
+	t_list	*new;
 
-	i = 0;
-	str = s;
-	while (i < n)
-	{
-		str[i] = c;
-		i++;
-	}
-	return (s);
+	new = malloc(sizeof(t_list));
+	if (!new)
+		return (0);
+	new->content = content;
+	new->next = 0;
+	return (new);
 }

@@ -6,20 +6,30 @@
 /*   By: npongdon <npongdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 17:58:50 by npongdon          #+#    #+#             */
-/*   Updated: 2022/09/04 18:07:30 by npongdon         ###   ########.fr       */
+/*   Updated: 2022/09/15 02:12:57 by npongdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_atoi(const char *nptr)
 {
-	int	n;
+	int	ret;
+	int	neg;
 
-	n = 0;
-	while (*nptr >= '0' && *nptr <= '9')
+	ret = 0;
+	neg = 1;
+	while (*nptr == ' ' || (*nptr >= 9 && *nptr <= 13))
+		nptr++;
+	if (*nptr == '-' || *nptr == '+')
 	{
-		n *= 10;
-		n += *nptr - '0';
+		if (*nptr == '-')
+			neg = -1;
 		nptr++;
 	}
-	return (n);
+	while (*nptr >= '0' && *nptr <= '9')
+	{
+		ret *= 10;
+		ret += *nptr - '0';
+		nptr++;
+	}
+	return (ret * neg);
 }

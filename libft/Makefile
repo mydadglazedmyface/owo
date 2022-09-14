@@ -6,9 +6,14 @@
 #    By: npongdon <npongdon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/07 18:09:55 by npongdon          #+#    #+#              #
-#    Updated: 2022/09/12 22:26:30 by npongdon         ###   ########.fr        #
+#    Updated: 2022/09/14 17:53:00 by npongdon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+NAME	=	libft.a
+
+CC		=	gcc -c
+CFLAGS	=	-Wall -Wextra -Werror
 
 SRC		=	ft_atoi.c     ft_isascii.c  ft_memcmp.c      ft_putendl_fd.c  ft_strdup.c    ft_strlen.c   ft_strtrim.c \
 			ft_bzero.c    ft_isdigit.c  ft_memcpy.c      ft_putnbr_fd.c   ft_striteri.c  ft_strmapi.c  ft_substr.c \
@@ -18,13 +23,27 @@ SRC		=	ft_atoi.c     ft_isascii.c  ft_memcmp.c      ft_putendl_fd.c  ft_strdup.c
 
 OBJ		=	$(SRC:.c=.o)
 
-LIB		=	libft.a
+B_SRC	=	ft_lstadd_back.c   ft_lstclear.c   ft_lstiter.c  ft_lstmap.c  ft_lstsize.c \
+			ft_lstadd_front.c  ft_lstdelone.c  ft_lstlast.c  ft_lstnew.c
 
-comp:	
-			gcc -c -Wall -Wextra -Werror $(SRC)
+B_OBJ	=	$(B_SRC:.c=.o)
 
-all:	comp
-			ar rc $(LIB) $(OBJ)
+$(NAME):
+			$(CC) $(CFLAGS) $(SRC)
+			ar -rcs $(NAME) $(OBJ)
+
+all: $(NAME)
+
+bonus:
+			$(CC) $(CFLAGS) $(SRC) $(B_SRC)
+			ar -rcs $(NAME) $(OBJ) $(B_OBJ)
 
 clean:
-			rm -f $(OBJ)
+			rm -f $(OBJ) $(B_OBJ)
+
+fclean: clean
+			rm -f $(NAME)
+
+re: fclean all
+
+.PHONY:		all clean fclean re

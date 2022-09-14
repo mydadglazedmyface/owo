@@ -6,7 +6,7 @@
 /*   By: npongdon <npongdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 17:07:54 by npongdon          #+#    #+#             */
-/*   Updated: 2022/09/08 19:29:07 by npongdon         ###   ########.fr       */
+/*   Updated: 2022/09/14 23:04:08 by npongdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 		while (little[j] == big[i + j] && i + j < len)
 			j++;
 		if (little[j] == '\0')
-			break ;
+			return ((char *)big + i);
 		i++;
 	}
-	return ((char *)big + i);
+	return (0);
 }
