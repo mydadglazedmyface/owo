@@ -6,7 +6,7 @@
 /*   By: npongdon <npongdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 17:35:53 by npongdon          #+#    #+#             */
-/*   Updated: 2022/09/13 15:46:42 by npongdon         ###   ########.fr       */
+/*   Updated: 2022/09/20 20:24:39 by npongdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static size_t	ft_spcount(char const *s, char c)
 	i = 1;
 	while (*s != '\0')
 	{
-		if (*s == c)
+		if (*s == c && *(s + 1) != c)
 			i++;
 		s++;
 	}
@@ -57,7 +57,8 @@ char	**ft_split(char const *s, char c)
 		j = 0;
 		while (s[j] != '\0' && s[j] != c)
 			j++;
-		arr[i] = ft_substr(s, 0, j);
+		if (j > 0)
+			arr[i] = ft_substr(s, 0, j);
 		if (arr[i] == 0)
 			return (ft_spabort(arr, i));
 		s += j + 1;
