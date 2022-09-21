@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: npongdon <npongdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/10 17:35:53 by npongdon          #+#    #+#             */
-/*   Updated: 2022/09/20 20:24:39 by npongdon         ###   ########.fr       */
+/*   Created: 2022/09/21 14:54:05 by npongdon          #+#    #+#             */
+/*   Updated: 2022/09/21 17:50:38 by npongdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,42 +15,44 @@
 static size_t	ft_spcount(char const *s, char c)
 {
 	size_t	i;
+	size_t	j;
 
-	i = 1;
+	i = 0;
+	j = 0;
 	while (*s != '\0')
 	{
-		if (*s == c && *(s + 1) != c)
+		if (j == 1 && *s == c)
 			i++;
+		if (*s == c)
+			j = 0;
+		else
+			j = 1;
 		s++;
 	}
+	if (j == 1)
+		i++;
 	return (i);
 }
 
-static char	**ft_spabort(char **arr, size_t i)
+static char	**ft_spabort(char **arr)
 {
-	size_t	j;
+	size_t	i;
 
-	j = 0;
-	while (j <= i)
+	i = 0;
+	while (arr[i])
 	{
-		free(arr[j]);
-		j++;
+		free(arr[i]);
+		i++;
 	}
 	free(arr);
 	return (0);
 }
 
-char	**ft_split(char const *s, char c)
+static char	**onemorelinepls(char const *s, char c, char **arr, size_t size)
 {
-	char	**arr;
 	size_t	i;
 	size_t	j;
-	size_t	size;
 
-	size = ft_spcount(s, c);
-	arr = malloc((size + 1) * sizeof(char *));
-	if (!arr || !c)
-		return (0);
 	i = 0;
 	while (i < size)
 	{
@@ -58,12 +60,29 @@ char	**ft_split(char const *s, char c)
 		while (s[j] != '\0' && s[j] != c)
 			j++;
 		if (j > 0)
+		{
 			arr[i] = ft_substr(s, 0, j);
-		if (arr[i] == 0)
-			return (ft_spabort(arr, i));
+			if (!(arr[i]))
+				return (ft_spabort(arr));
+			i++;
+		}
 		s += j + 1;
-		i++;
 	}
 	arr[i] = 0;
 	return (arr);
 }
+
+char	**ft_split(char const *s, char c)
+{
+	char	**arr;
+	size_t	size;
+
+	size = ft_spcount(s, c);
+	arr = malloc((size + 1) * sizeof(char *));
+	if (!arr)
+		return (0);
+	return (onemorelinepls(s, c, arr, size));
+}
+/*\\===============================================\\  */
+/* \\ I JUST NEED ONE MORE LINE PLEASE NORM-SAMA... \\ */
+/*  \\===============================================\\*/
