@@ -6,7 +6,7 @@
 /*   By: npongdon <npongdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 19:52:34 by npongdon          #+#    #+#             */
-/*   Updated: 2022/09/15 16:10:44 by npongdon         ###   ########.fr       */
+/*   Updated: 2022/09/25 00:38:32 by npongdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,11 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
 	t_list	*p;
 
-	if (!lst)
-		return ;
-	while (*lst)
+	p = *lst;
+	while (p)
 	{
-		p = *lst;
+		p = (*lst)->next;
 		ft_lstdelone(*lst, del);
-		*lst = p->next;
+		*lst = p;
 	}
 }

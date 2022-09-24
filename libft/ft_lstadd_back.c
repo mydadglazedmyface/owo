@@ -6,7 +6,7 @@
 /*   By: npongdon <npongdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 18:57:03 by npongdon          #+#    #+#             */
-/*   Updated: 2022/09/17 16:19:13 by npongdon         ###   ########.fr       */
+/*   Updated: 2022/09/24 22:37:06 by npongdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	if (!new)
-		return ;
 	if (*lst)
 		ft_lstlast(*lst)->next = new;
-	lst[ft_lstsize(*lst)] = new;
+	else
+		*lst = new;
 }
