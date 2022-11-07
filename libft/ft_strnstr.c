@@ -6,7 +6,7 @@
 /*   By: npongdon <npongdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 17:07:54 by npongdon          #+#    #+#             */
-/*   Updated: 2022/09/20 20:07:46 by npongdon         ###   ########.fr       */
+/*   Updated: 2022/11/07 04:01:13 by npongdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	size_t	i;
 	size_t	j;
 
+	if (*little == '\0')
+		return ((char *)big);
+	if (len > ft_strlen(big))
+		len = ft_strlen(big);
 	i = 0;
 	while (big[i] != '\0')
 	{
