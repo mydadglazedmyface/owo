@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dong.c                                             :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npongdon <npongdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/27 20:51:01 by npongdon          #+#    #+#             */
-/*   Updated: 2023/06/27 21:51:00 by npongdon         ###   ########.fr       */
+/*   Created: 2023/06/30 21:38:10 by npongdon          #+#    #+#             */
+/*   Updated: 2023/07/02 21:28:50 by npongdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "get_next_line.h"
 #include <stdio.h>
-#include <fcntl.h>
 
-int	main(int argc, char **argv)
+int	main(void)
 {
+	char	*dam;
 	int		fd;
-	char	*line;
-	char	buffer[1024];
 
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
+	fd = open("yes", O_RDONLY);
+	dam = malloc(1000 * sizeof(char));
+	for (int i = 1; i <= 5; i++)
 	{
-		printf("Can't open.\n");
-		return (1);
+		dam = get_next_line(fd);
+		if (!dam)
+			printf("NULL");
+		else
+			printf("%s", dam);
 	}
-	printf("%ld\n", read(fd, buffer, 1024));
+	printf("\n");
+	free(dam);
 	close(fd);
 	return (0);
 }
