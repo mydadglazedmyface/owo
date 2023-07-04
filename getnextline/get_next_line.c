@@ -6,44 +6,73 @@
 /*   By: npongdon <npongdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 19:38:00 by npongdon          #+#    #+#             */
-/*   Updated: 2023/07/03 18:17:54 by npongdon         ###   ########.fr       */
+/*   Updated: 2023/07/04 23:20:50 by npongdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <string.h>
 
-int	nl_find(char *buff, t_list **stash)
+int	nl_find(char *buf, t_list **stash)
 {
-	int	i;
+	int		i;
+	t_list	*now;
 
 	i = 0;
-	while ((*stash)->next != NULL)
+	now = *stash;
+	while (now)
 	{
-		i += (*stash)->len;
-		*stash = (*stash)->next;
+		i += BUFFER_SIZE;
+		now = now->next;
 	}
-	while (buff[i] != '\n')
+	while (buf[i] != '\0')
 	{
+		if (buf[i] == '\n')
+			return (i);
 		i++;
 	}
-	return (i);
+	return (-1);
+}
+
+void	makeline(int fd, t_list **stash, int *offset)
+{
+	char	*buf;
+	int		b;
+	int		n;
+
+	buf = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!buf)
+		return ;
+	n = -1;
+	b = 1;
+	while (n == -1 && b > 0)
+	{
+		b = read(fd, buf, BUFFER_SIZE);
+		if (b == -1)
+			return ;
+		buf[b] = '\0';
+		n = nl_find(buf, stash);
+		if (n >= 0)
+		{
+			*offset += n + 1;
+			free(buf);
+			return ;
+		}
+		ft_lstadd_back(stash, ft_lstnew(buf));
+	}
 }
 
 char	*get_next_line(int fd)
 {
 	static int		offset;
-	char			*buff[BUFFER_SIZE];
-	t_list			stash;
+	char			*line;
+	t_list			*stash;
 
 	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (NULL);
-	if (!buff)
-		buff = malloc(BUFFER_SIZE * sizeof(char));
-	while (1)
-	{
-		if (read(fd, buff, BUFFER_SIZE) == -1)
-			return (NULL);
-	}
-	return (buff);
+	line = NULL;
+	offset = 0;
+	stash = ft_lstnew("");
+	makeline(fd, &stash, &offset);
+	return (line);
 }
