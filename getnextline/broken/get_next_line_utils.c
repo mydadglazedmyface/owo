@@ -5,12 +5,29 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: npongdon <npongdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/09 01:09:16 by npongdon          #+#    #+#             */
-/*   Updated: 2023/07/16 06:13:16 by npongdon         ###   ########.fr       */
+/*   Created: 2023/07/02 19:47:12 by npongdon          #+#    #+#             */
+/*   Updated: 2023/07/08 22:57:27 by npongdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+void	*ft_memcpy(void *dst, const void *src, unsigned int n)
+{
+	unsigned int		i;
+	const unsigned char	*srcc;
+	unsigned char		*dstt;
+
+	i = 0;
+	dstt = dst;
+	srcc = src;
+	while (i < n)
+	{
+		dstt[i] = srcc[i];
+		i++;
+	}
+	return (dst);
+}
 
 size_t	ft_strlen(const char *s)
 {
@@ -20,19 +37,6 @@ size_t	ft_strlen(const char *s)
 	while (s[i] != '\0')
 		i++;
 	return (i);
-}
-
-char	*ft_strchr(const char *s, char c)
-{
-	while (s)
-	{
-		if (*s == c)
-			return ((char *)s);
-		if (*s == '\0')
-			break ;
-		s++;
-	}
-	return (0);
 }
 
 size_t	ft_strlcpy(char *dest, const char *src, size_t size)
@@ -52,6 +56,21 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 	while (src[i] != '\0')
 		i++;
 	return (i);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char			*str;
+
+	if (ft_strlen(s) <= start)
+		start = ft_strlen(s);
+	if (ft_strlen(s) - start < len)
+		len = ft_strlen(s) - start;
+	str = malloc(len + 1);
+	if (!str)
+		return (0);
+	ft_memcpy(str, s + start, len);
+	return (str);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)

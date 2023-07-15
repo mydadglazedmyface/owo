@@ -5,74 +5,106 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: npongdon <npongdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/30 19:38:00 by npongdon          #+#    #+#             */
-/*   Updated: 2023/07/04 23:20:50 by npongdon         ###   ########.fr       */
+/*   Created: 2023/07/09 01:03:04 by npongdon          #+#    #+#             */
+/*   Updated: 2023/07/16 06:15:51 by npongdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <string.h>
 
-int	nl_find(char *buf, t_list **stash)
+char	*ft_free(char *buffer, char *buf)
 {
-	int		i;
-	t_list	*now;
+	char	*temp;
 
-	i = 0;
-	now = *stash;
-	while (now)
-	{
-		i += BUFFER_SIZE;
-		now = now->next;
-	}
-	while (buf[i] != '\0')
-	{
-		if (buf[i] == '\n')
-			return (i);
-		i++;
-	}
-	return (-1);
+	temp = ft_strjoin(buffer, buf);
+	free(buffer);
+	return (temp);
 }
 
-void	makeline(int fd, t_list **stash, int *offset)
+char	*ft_next(char *buf)
+{
+	char	*line;
+	int		i;
+	int		j;
+
+	i = 0;
+	while (buf[i] != '\0' && buf[i] != '\n')
+		i++;
+	if (buf[i] == '\0')
+	{
+		free(buf);
+		return (NULL);
+	}
+	line = malloc(ft_strlen(buf) - i + 1);
+	i += 1;
+	j = 0;
+	while (buf[i])
+		line[j++] = buf[i++];
+	free(buf);
+	return (line);
+}
+
+char	*ft_line(char *buf)
+{
+	char	*line;
+	int		i;
+
+	i = 0;
+	if (buf[i] == '\0')
+		return (NULL);
+	while (buf[i] && buf[i] != '\n')
+		i++;
+	line = malloc(i + 2);
+	i = 0;
+	while (buf[i] && buf[i] != '\n')
+	{
+		line[i] = buf[i];
+		i++;
+	}
+	return (line);
+}
+
+char	*read_file(int fd, char *res)
 {
 	char	*buf;
 	int		b;
-	int		n;
 
-	buf = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	buf = malloc(BUFFER_SIZE + 1);
 	if (!buf)
-		return ;
-	n = -1;
+		return (NULL);
+	buf[0] = '\0';
+	if (!res)
+	{
+		res = malloc(1);
+		res[0] = '\0';
+	}
 	b = 1;
-	while (n == -1 && b > 0)
+	while (b > 0 && !ft_strchr(buf, '\n'))
 	{
 		b = read(fd, buf, BUFFER_SIZE);
 		if (b == -1)
-			return ;
-		buf[b] = '\0';
-		n = nl_find(buf, stash);
-		if (n >= 0)
 		{
-			*offset += n + 1;
 			free(buf);
-			return ;
+			return (NULL);
 		}
-		ft_lstadd_back(stash, ft_lstnew(buf));
+		buf[b] = '\0';
+		res = ft_free(res, buf);
 	}
+	free(buf);
+	return (res);
 }
 
 char	*get_next_line(int fd)
 {
-	static int		offset;
-	char			*line;
-	t_list			*stash;
+	static char	*buf;
+	char		*line;
 
-	if (BUFFER_SIZE <= 0 || fd < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	line = NULL;
-	offset = 0;
-	stash = ft_lstnew("");
-	makeline(fd, &stash, &offset);
+	buf = read_file(fd, buf);
+	if (!buf)
+		return (NULL);
+	line = ft_line(buf);
+	buf = ft_next(buf);
 	return (line);
 }
